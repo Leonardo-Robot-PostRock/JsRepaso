@@ -46,7 +46,7 @@ const getSalario = (id) => {
     })
 }
 
-const id = 1;
+const id = 3;
 
 // getEmpleado(id)
 //     .then(empleado => console.log(empleado))
@@ -56,12 +56,26 @@ const id = 1;
 //     .then(salario => console.log(salario))
 //     .catch(err => console.log(err))
 
+// PROMISE HELL -------------------------------------------------------
+
+// getEmpleado(id)
+//     .then(empleado => {
+//         getSalario(id)
+//             .then(salario => {
+//                 console.log('El empleado:', empleado, ' tiene un salario de ', salario);
+//             })
+//             .catch(err => console.log(err))
+//     })
+//     .catch(err => console.log(err))
+
+let nombre;
+
+// Resolución a Promise hell
+
 getEmpleado(id)
     .then(empleado => {
-        getSalario(id)
-            .then(salario => {
-                console.log('El empleado:', empleado, ' tiene un salario de ', salario);
-            })
-            .catch(err => console.log(err))
+        nombre = empleado
+        return getSalario(id)
     })
+    .then(salario => console.log(`El empleado: `, nombre, ' tiene un salario de: ', salario))
     .catch(err => console.log(err))
